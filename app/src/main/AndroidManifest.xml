@@ -25,7 +25,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".IdleActivity"></activity>
+        <activity android:name=".IdleActivity" />
+        <activity android:name=".BattleActivity"></activity>
     </application>
 
 </manifest>
