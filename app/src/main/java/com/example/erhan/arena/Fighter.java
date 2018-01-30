@@ -1,6 +1,7 @@
 package com.example.erhan.arena;
 
 import android.app.Application;
+import java.util.Random;
 
 /**
  * Created by Erhan on 2018-01-19.
@@ -15,42 +16,63 @@ import android.app.Application;
     public int endurance;
     public int defense;
 
-    public int hp;
-    public int st;
-    public int dmg;
+    public int maxHp;
+    public int curHp;
+    public int maxSt;
+    public int curSt;
+    public int maxDmg;
+    public int minDmg;
+    public int curDmg;
     public float critChance;
-    public float dodgeChance;
+    public float evasion;
+    public float accuracy;
     public float enemyDmgReduc;
     public float stRechargeRate;
 
     public void setStartingStats()
     {
+        level = 1;
         strength = 10;
-        dexterity = 10;
+        dexterity = 20;
         endurance = 10;
         defense = 10;
 
-        st = 1000;
+        maxSt = 1000;
+        curSt = maxSt;
     }
 
     public void setDmg()
     {
-        dmg = strength * 3;
+        maxDmg = strength * 3;
+        float f = maxDmg * 0.6f;
+        minDmg = Math.round(f);
+    }
+
+    public void setCurDmg()
+    {
+        Random rand = new Random();
+        curDmg = rand.nextInt(maxDmg + 1 - minDmg) + minDmg;
     }
 
     public void setCritChance()
     {
-        critChance = dexterity * 0.1f;
+        critChance = (dexterity * 0.1f)+1;
     }
 
-    public void setDodgeChance()
+    public void setEvasion()
     {
-        dodgeChance = dexterity * 0.1f;
+        evasion = (dexterity * 0.09f);
+    }
+
+    public void setAccuracy()
+    {
+        accuracy = (dexterity * 0.12f);
     }
 
     public void setHp()
     {
-        hp = (endurance * 5) +(level * 3);
+        maxHp = (endurance * 5) +(level * 3);
+        curHp = maxHp;
     }
 
     public void setStaminaRechargePercent()
@@ -58,14 +80,18 @@ import android.app.Application;
         stRechargeRate = (endurance / 10) + 50;
     }
 
-    public void setEnemyDmgReduction(){enemyDmgReduc = defense / 10;}
+    public void setEnemyDmgReduction()
+    {
+       enemyDmgReduc = ((defense)*0.01f) / (1+0.01f*(defense));
+    }
 
-    public void setAll()
+    public void setAllStats()
     {
         setDmg();
         setHp();
         setCritChance();
-        setDodgeChance();
+        setEvasion();
+        setAccuracy();
         setStaminaRechargePercent();
         setEnemyDmgReduction();
     }

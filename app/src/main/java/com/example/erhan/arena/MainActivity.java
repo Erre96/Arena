@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    public static Fighter fighter = new Fighter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BattleActivity.plr.setStartingStats();
+        BattleActivity.plr.setAllStats();
+        BattleActivity.ai.setAllStats();
         
         final Button button = findViewById(R.id.newGame);
         button.setOnClickListener(new View.OnClickListener() {

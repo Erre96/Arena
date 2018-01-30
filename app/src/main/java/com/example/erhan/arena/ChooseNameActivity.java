@@ -19,8 +19,8 @@ public class ChooseNameActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText inputTxt = findViewById(R.id.nameEdit);
-                MainActivity.fighter.name = inputTxt.getText().toString();
-                MainActivity.fighter.setStartingStats();
+                BattleActivity.plr.name = inputTxt.getText().toString();
+                BattleActivity.plr.setStartingStats();
                 Intent intent = new Intent(v.getContext(), IdleActivity.class);
                 startActivity(intent);
             }
