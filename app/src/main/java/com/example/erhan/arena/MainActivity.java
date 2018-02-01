@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BattleActivity.tm.setAllMessages();
         BattleActivity.plr.setStartingStats();
         BattleActivity.plr.setAllStats();
         BattleActivity.ai.setAllStats();

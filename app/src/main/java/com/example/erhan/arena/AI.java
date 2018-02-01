@@ -11,10 +11,13 @@ public class AI extends Fighter {
     public void setStartingStats() {
         int lv = BattleActivity.plr.level;
 
-        strength = 3+ ((lv * 3));
+        strength = 5+ ((lv * 3));
         endurance = 2+ ((lv * 4));
-        dexterity = 1+ ((lv * 1));
+        dexterity = 3+ ((lv * 2));
         defense = 4 + ((lv * 2));
+
+        maxSt = 1000;
+        curSt = maxSt;
     }
 
 

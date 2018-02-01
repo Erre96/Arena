@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Arena</string>
+    <string name="attack">Attacco</string>
+    <string name="special">Speciale</string>
+    <string name="rage">Rabbia</string>
+    <string name="surrender">Resa</string>
+</resources>

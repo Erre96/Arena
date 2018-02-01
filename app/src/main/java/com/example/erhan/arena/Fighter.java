@@ -66,7 +66,7 @@ import java.util.Random;
 
     public void setAccuracy()
     {
-        accuracy = (dexterity * 0.12f);
+        accuracy = (dexterity * 0.16f);
     }
 
     public void setHp()
@@ -94,5 +94,7 @@ import java.util.Random;
         setAccuracy();
         setStaminaRechargePercent();
         setEnemyDmgReduction();
+
+        curSt = maxSt;
     }
 }
