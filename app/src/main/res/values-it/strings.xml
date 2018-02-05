@@ -5,4 +5,18 @@
     <string name="special">Speciale</string>
     <string name="rage">Rabbia</string>
     <string name="surrender">Resa</string>
+    <string name="nameWriteHint">Come si chiama?</string>
+    <string name="next">Prossimo</string>
+    <string name="nextBattle">Prossima Battaglia</string>
+    <string name="saveGame">Salva il Gioco</string>
+    <string name="stats">statistiche</string>
+    <string name="newGame">Nuovo Gioco</string>
+    <string name="loadGame">Caricare il Gioco</string>
+    <string name="settings">Impostazioni</string>
+    <string name="strength">Forza :</string>
+    <string name="dexterity">Destrezza :</string>
+    <string name="defense">Difesa :</string>
+    <string name="endurance">Resistenza :</string>
+    <string name="plus">+</string>
+    <string name="pointsLeft">Punti a sinistra</string>
 </resources>

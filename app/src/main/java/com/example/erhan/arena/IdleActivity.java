@@ -20,10 +20,20 @@ public class IdleActivity extends AppCompatActivity {
         nt.setText(BattleActivity.plr.name.toString());
 
         final Button nextBattleButton = findViewById(R.id.nextBattle);
+        final Button statsButton = findViewById(R.id.stats);
 
+
+        //on click listeners
         nextBattleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), BattleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        statsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LevelUpActivity.class);
                 startActivity(intent);
             }
         });

@@ -32,6 +32,9 @@ public class BattleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
 
+        plr.setAllStats();
+        ai.setAllStats();
+
         winner = null;
 
         setInfoPlr();
@@ -39,21 +42,31 @@ public class BattleActivity extends AppCompatActivity {
 
         //text references
         final TextView battleInfo1 = findViewById(R.id.battleInfo1);
+        battleInfo1.setText(tm.doSome[lang]);
 
         //button references
         final Button attackButton = findViewById(R.id.attack);
-        battleInfo1.setText(tm.doSome[lang]);
+        final Button specialButton = findViewById(R.id.special);
+        final Button rageButton = findViewById(R.id.rage);
 
 
 
         //on click listeners
         attackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!plrActive && !aiActive && winner == null) {
-                    plrActive = true;
-                    startStop();
-                    attackManagerPlr();
+                attack(1);
                 }
+            });
+
+        specialButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                attack(2);
+            }
+        });
+
+        rageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                attack(3);
             }
         });
     }
@@ -84,7 +97,9 @@ public class BattleActivity extends AppCompatActivity {
                 {
                     if(winner == "plr")
                     {
-                        startActivity(new Intent(BattleActivity.this, MainActivity.class));
+                        plr.level++;
+                        plr.upgradePoints+=5;
+                        startActivity(new Intent(BattleActivity.this, LevelUpActivity.class));
                     }
                     else if(winner == "ai")
                     {
@@ -94,6 +109,7 @@ public class BattleActivity extends AppCompatActivity {
                 if(plrActive)
                 {
                     plrActive = false;
+                    refreshTableInfo();
                     boolean enemyDead = checkIfDeadAI();
                     if (enemyDead)
                     {
@@ -112,6 +128,8 @@ public class BattleActivity extends AppCompatActivity {
                 else if(aiActive)
                 {
                     aiActive = false;
+                    raiseEnergyForAll();
+                    refreshTableInfo();
                     boolean plrDead = checkIfDeadPlr();
                     if(plrDead)
                     {
@@ -144,7 +162,7 @@ public class BattleActivity extends AppCompatActivity {
 
         boolean hit = ai.determineIfHit(plr);
         if (hit) {
-            plr.setCurDmg();
+            plr.setCurDmg(ai.defense);
             String dmg = Integer.toString(plr.curDmg);
             battleInfo1.setText(tm.plrAtt[lang]+dmg);
             //battleInfo1.setText(String.valueOf(plrActive+String.valueOf(aiActive)));
@@ -163,7 +181,7 @@ public class BattleActivity extends AppCompatActivity {
 
         boolean hit = plr.determineIfHit(ai);
         if (hit) {
-            ai.setCurDmg();
+            ai.setCurDmg(plr.defense);
             String dmg = Integer.toString(ai.curDmg);
             battleInfo1.setText(tm.aiAtt[lang]+dmg);
             //battleInfo1.setText(String.valueOf(plrActive+String.valueOf(aiActive)));
@@ -193,7 +211,6 @@ public class BattleActivity extends AppCompatActivity {
         final TextView infoAI2 = findViewById((R.id.infoAI2));
 
         infoAI.setText("Hp : "+ai.curHp+" / "+ai.maxHp);
-        String g = Integer.toString(ai.dexterity);
         infoAI2.setText("St : "+ai.curSt+" / "+ai.maxSt);
     }
 
@@ -216,5 +233,25 @@ public class BattleActivity extends AppCompatActivity {
         else
             return false;
     }
-}
+
+    public void raiseEnergyForAll()
+    {
+        plr.curSt += plr.maxSt/25;
+        ai.curSt += ai.maxSt/25;
+    }
+
+    public void refreshTableInfo()
+    {
+        setInfoPlr();
+        setInfoAI();
+    }
+
+    public void attack(int type)
+    {
+        if (!plrActive && !aiActive && winner == null) {
+            plrActive = true;
+            startStop();
+            attackManagerPlr();
+    }
+}}
 

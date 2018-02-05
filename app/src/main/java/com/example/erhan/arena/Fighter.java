@@ -26,19 +26,20 @@ import java.util.Random;
     public float critChance;
     public float evasion;
     public float accuracy;
-    public float enemyDmgReduc;
+    public float selfDmgReduc;
     public float stRechargeRate;
+
+    public int upgradePoints;
 
     public void setStartingStats()
     {
         level = 1;
-        strength = 10;
-        dexterity = 20;
+        strength = 13;
+        dexterity = 15;
         endurance = 10;
         defense = 10;
 
         maxSt = 1000;
-        curSt = maxSt;
     }
 
     public void setDmg()
@@ -48,15 +49,26 @@ import java.util.Random;
         minDmg = Math.round(f);
     }
 
-    public void setCurDmg()
+    public void setCurDmg(int def)
     {
         Random rand = new Random();
         curDmg = rand.nextInt(maxDmg + 1 - minDmg) + minDmg;
+        setCriticalHit();
+        setSelfDmgReduction(def);
     }
 
-    public void setCritChance()
+    public void setCriticalChance()
     {
         critChance = (dexterity * 0.1f)+1;
+    }
+    private void setCriticalHit()
+    {
+        Random rand = new Random();
+        int v = rand.nextInt(100);
+        if(v < critChance)
+        {
+            curDmg *= 1.5f;
+        }
     }
 
     public void setEvasion()
@@ -71,7 +83,7 @@ import java.util.Random;
 
     public void setHp()
     {
-        maxHp = (endurance * 5) +(level * 3);
+        maxHp = (endurance * 6) +(level * 3);
         curHp = maxHp;
     }
 
@@ -80,21 +92,53 @@ import java.util.Random;
         stRechargeRate = (endurance / 10) + 50;
     }
 
-    public void setEnemyDmgReduction()
+    private void setSelfDmgReduction(int def)
     {
-       enemyDmgReduc = ((defense)*0.01f) / (1+0.01f*(defense));
+       selfDmgReduc = ((def)*0.01f) / (1+0.01f*(def));
+        float f = curDmg * (1 - selfDmgReduc);
+        curDmg = Math.round(f);
     }
 
     public void setAllStats()
     {
         setDmg();
         setHp();
-        setCritChance();
+        setCriticalChance();
         setEvasion();
         setAccuracy();
         setStaminaRechargePercent();
-        setEnemyDmgReduction();
 
-        curSt = maxSt;
+        curSt = maxSt / 4;
+    }
+
+    void upgradeStat(String type)
+    {
+        switch (type) {
+            case "str" :
+                BattleActivity.plr.strength++;
+                BattleActivity.plr.upgradePoints--;
+                break;
+        }
+
+        switch (type) {
+            case "dex" :
+                BattleActivity.plr.dexterity++;
+                BattleActivity.plr.upgradePoints--;
+                break;
+        }
+
+        switch (type) {
+            case "def" :
+                BattleActivity.plr.defense++;
+                BattleActivity.plr.upgradePoints--;
+                break;
+        }
+
+        switch (type) {
+            case "end" :
+                BattleActivity.plr.endurance++;
+                BattleActivity.plr.upgradePoints--;
+                break;
+        }
     }
 }
