@@ -19,4 +19,11 @@
     <string name="endurance">Resistenza :</string>
     <string name="plus">+</string>
     <string name="pointsLeft">Punti a sinistra</string>
+    <string name="doSome">Fare qualcosa</string>
+    <string name="plrAttack">"Avete attaccato il nemico <br /> Danni : </string>
+    <string name="aiAtt">The enemy attacked you <br /> Danni : </string>
+    <string name="plrWon"> Avete sconfigguto il nemico. <br /> Congratulations! </string>
+    <string name="aiWon"> Siete stato sconfigguto... <br/> Migliore fortuna la volta prossima </string>
+    <string name="plrMiss">Avete mancato</string>
+    <string name="aiMiss">"L'oppositore mancante</string>
 </resources>

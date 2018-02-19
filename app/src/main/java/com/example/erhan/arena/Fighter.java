@@ -35,9 +35,9 @@ import java.util.Random;
     {
         level = 1;
         strength = 13;
-        dexterity = 15;
+        dexterity = 5;
         endurance = 10;
-        defense = 10;
+        defense = 1110;
 
         maxSt = 1000;
     }

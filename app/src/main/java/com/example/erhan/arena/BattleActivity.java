@@ -16,8 +16,7 @@ public class BattleActivity extends AppCompatActivity {
 
 
     public static String winner;
-    public static int lang = 0;
-    public static TextMessage tm = new TextMessage();
+    public String message;
     public static Player plr = new Player();
     public static AI ai = new AI();
 
@@ -26,6 +25,8 @@ public class BattleActivity extends AppCompatActivity {
     private boolean timerRunning;
     boolean plrActive = false;
     boolean aiActive = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class BattleActivity extends AppCompatActivity {
 
         //text references
         final TextView battleInfo1 = findViewById(R.id.battleInfo1);
-        battleInfo1.setText(tm.doSome[lang]);
+        battleInfo1.setText(getString(R.string.doSome));
 
         //button references
         final Button attackButton = findViewById(R.id.attack);
@@ -69,6 +70,7 @@ public class BattleActivity extends AppCompatActivity {
                 attack(3);
             }
         });
+
     }
 
     public void startStop()
@@ -104,6 +106,7 @@ public class BattleActivity extends AppCompatActivity {
                     else if(winner == "ai")
                     {
                         startActivity(new Intent(BattleActivity.this, MainActivity.class));
+                        plr.upgradePoints = 0;
                     }
                 }
                 if(plrActive)
@@ -113,7 +116,7 @@ public class BattleActivity extends AppCompatActivity {
                     boolean enemyDead = checkIfDeadAI();
                     if (enemyDead)
                     {
-                        battleInfo1.setText(tm.plrWon[lang]);
+                        battleInfo1.setText(getString(R.string.plrWon));
                         winner = "plr";
                         startTimer();
                     }
@@ -133,7 +136,7 @@ public class BattleActivity extends AppCompatActivity {
                     boolean plrDead = checkIfDeadPlr();
                     if(plrDead)
                     {
-                        battleInfo1.setText(tm.aiWon[lang]);
+                        battleInfo1.setText(getString(R.string.aiWon));
                         winner = "ai";
                         startTimer();
                     }
@@ -152,7 +155,7 @@ public class BattleActivity extends AppCompatActivity {
         countDownTimer.cancel();
         timerRunning = false;
         if(winner == null) {
-            battleInfo1.setText(tm.doSome[lang]);
+            battleInfo1.setText(getString(R.string.doSome));
         }
     }
 
@@ -164,14 +167,14 @@ public class BattleActivity extends AppCompatActivity {
         if (hit) {
             plr.setCurDmg(ai.defense);
             String dmg = Integer.toString(plr.curDmg);
-            battleInfo1.setText(tm.plrAtt[lang]+dmg);
+            battleInfo1.setText(getString(R.string.plrAttack)+dmg);
             //battleInfo1.setText(String.valueOf(plrActive+String.valueOf(aiActive)));
             ai.curHp -= plr.curDmg;
             setInfoAI();
         }
 
         if (!hit) {
-            battleInfo1.setText(tm.plrMiss[lang]);
+            battleInfo1.setText(getString(R.string.plrMiss));
         }
     }
 
@@ -183,14 +186,14 @@ public class BattleActivity extends AppCompatActivity {
         if (hit) {
             ai.setCurDmg(plr.defense);
             String dmg = Integer.toString(ai.curDmg);
-            battleInfo1.setText(tm.aiAtt[lang]+dmg);
+            battleInfo1.setText(getString(R.string.aiAtt)+dmg);
             //battleInfo1.setText(String.valueOf(plrActive+String.valueOf(aiActive)));
             plr.curHp -= ai.curDmg;
             setInfoPlr();
         }
 
         if (!hit) {
-            battleInfo1.setText(tm.aiMiss[lang]);
+            battleInfo1.setText(getString(R.string.aiMiss));
         }
     }
 

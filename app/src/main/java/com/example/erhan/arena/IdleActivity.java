@@ -17,7 +17,7 @@ public class IdleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_idle);
 
         final TextView nt =  findViewById(R.id.nameTitle);
-        nt.setText(BattleActivity.plr.name.toString());
+        nt.setText(BattleActivity.plr.name+"    Lv : "+String.valueOf(BattleActivity.plr.level));
 
         final Button nextBattleButton = findViewById(R.id.nextBattle);
         final Button statsButton = findViewById(R.id.stats);

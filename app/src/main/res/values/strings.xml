@@ -18,4 +18,11 @@
     <string name="endurance">Endurance :</string>
     <string name="plus">+</string>
     <string name="pointsLeft">Points Left</string>
+    <string name="doSome">Do something</string>
+    <string name="plrAttack">"You attacked the enemy <br /> Damage : "</string>
+    <string name="aiAtt">"The opponent attacked you <br /> Damage : "</string>
+    <string name="plrWon"> You defeated the enemy. <br /> Congratulations! </string>
+    <string name="aiWon"> You were defeated... Better luck next time </string>
+    <string name="plrMiss">You missed</string>
+    <string name="aiMiss">The opponent missed</string>
 </resources>
