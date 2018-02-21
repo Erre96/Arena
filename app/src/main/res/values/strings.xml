@@ -39,4 +39,5 @@
     <string name="fullOfEnergy">You are already full of energy</string>
     <string name="throwSand">Throw Sand</string>
     <string name="rest">Rest</string>
+    <string name="protection">Protection :</string>
 </resources>
