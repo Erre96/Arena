@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,7 @@ public class BattleActivity extends AppCompatActivity {
         final Button attackButton = findViewById(R.id.attack);
         final Button specialButton = findViewById(R.id.special);
         final Button rageButton = findViewById(R.id.rage);
+        final Button restButton = findViewById(R.id.rest);
 
 
 
@@ -71,6 +73,23 @@ public class BattleActivity extends AppCompatActivity {
             }
         });
 
+        restButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                boolean tired = plr.checkIfTired();
+                if(tired)
+                {
+                    plr.rest();
+                    refreshTableInfo();
+                    sendBattleMessage(getString(R.string.youRest));
+                    plrActive = true;
+                    startStop();
+                }
+                if(!tired) {
+                    sendBattleMessage(getString(R.string.fullOfEnergy));
+                    startStop();
+                }
+            }
+        });
     }
 
     public void startStop()
@@ -124,7 +143,7 @@ public class BattleActivity extends AppCompatActivity {
                     {
                         aiActive = true;
                         startTimer();
-                        attackManagerAI();
+                        attackManagerAI(1);
                     }
                 }
 
@@ -159,13 +178,25 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    public void attackManagerPlr()
+    public void attackManagerPlr(int type)
     {
         final TextView battleInfo1 = findViewById(R.id.battleInfo1);
 
+        if(type == 2)
+        {
+            plr.curSt-=25;
+            refreshTableInfo();
+        }
+
+        if(type == 3)
+        {
+            plr.curSt-=75;
+            refreshTableInfo();
+        }
+
         boolean hit = ai.determineIfHit(plr);
         if (hit) {
-            plr.setCurDmg(ai.defense);
+            plr.setCurDmg(ai.armorRating, type);
             String dmg = Integer.toString(plr.curDmg);
             battleInfo1.setText(getString(R.string.plrAttack)+dmg);
             //battleInfo1.setText(String.valueOf(plrActive+String.valueOf(aiActive)));
@@ -178,13 +209,13 @@ public class BattleActivity extends AppCompatActivity {
         }
     }
 
-    public void attackManagerAI()
+    public void attackManagerAI(int type)
     {
         final TextView battleInfo1 = findViewById(R.id.battleInfo1);
 
         boolean hit = plr.determineIfHit(ai);
         if (hit) {
-            ai.setCurDmg(plr.defense);
+            ai.setCurDmg(plr.armorRating, type);
             String dmg = Integer.toString(ai.curDmg);
             battleInfo1.setText(getString(R.string.aiAtt)+dmg);
             //battleInfo1.setText(String.valueOf(plrActive+String.valueOf(aiActive)));
@@ -204,8 +235,8 @@ public class BattleActivity extends AppCompatActivity {
         final TextView namePlr = findViewById(R.id.namePlr);
 
         namePlr.setText(plr.name+ (" (You)"));
-        infoPlr.setText("Hp : "+plr.curHp+" / "+plr.maxHp);
-        infoPlr2.setText("St : "+plr.curSt+" / "+plr.maxSt);
+        infoPlr.setText("HP : "+plr.curHp+" / "+plr.maxHp);
+        infoPlr2.setText("EN : "+plr.curSt+" %");
     }
 
     public void setInfoAI()
@@ -213,8 +244,8 @@ public class BattleActivity extends AppCompatActivity {
         final TextView infoAI = findViewById((R.id.infoAI));
         final TextView infoAI2 = findViewById((R.id.infoAI2));
 
-        infoAI.setText("Hp : "+ai.curHp+" / "+ai.maxHp);
-        infoAI2.setText("St : "+ai.curSt+" / "+ai.maxSt);
+        infoAI.setText("HP : "+ai.curHp+" / "+ai.maxHp);
+        infoAI2.setText("EN : "+ai.curSt+" %");
     }
 
     public boolean checkIfDeadAI()
@@ -239,8 +270,14 @@ public class BattleActivity extends AppCompatActivity {
 
     public void raiseEnergyForAll()
     {
-        plr.curSt += plr.maxSt/25;
-        ai.curSt += ai.maxSt/25;
+        if(plr.curSt<plr.maxSt )
+        {
+            plr.curSt += plr.maxSt/25;
+        }
+        if(ai.curSt<ai.maxSt )
+        {
+            ai.curSt += ai.maxSt / 25;
+        }
     }
 
     public void refreshTableInfo()
@@ -252,9 +289,69 @@ public class BattleActivity extends AppCompatActivity {
     public void attack(int type)
     {
         if (!plrActive && !aiActive && winner == null) {
-            plrActive = true;
-            startStop();
-            attackManagerPlr();
+            if(type == 1) {
+                attackMove(1);
+            }
+
+            if(type == 2) {
+                boolean possible = checkIfPossible(2,plr.curSt);
+                if(possible) {
+                    attackMove(2);
+                }
+
+                if(!possible)
+                {
+                    sendBattleMessage(getString(R.string.notEnoughEnergy));
+                    startStop();
+                }
+            }
+
+            if(type == 3) {
+                boolean possible = checkIfPossible(3,plr.curSt);
+                if(possible) {
+                    attackMove(3);
+                }
+
+                if(!possible)
+                {
+                    sendBattleMessage(getString(R.string.notEnoughEnergy));
+                    startStop();
+                }
+            }
+        }
     }
-}}
+
+    public void attackMove(int type)
+    {
+        plrActive = true;
+        startStop();
+        attackManagerPlr(type);
+    }
+
+    public boolean checkIfPossible(int type, int energy)
+    {
+        if(type == 2) {
+            if (energy >= 25) {
+                return true;
+            }
+            else return false;
+
+        }
+        if(type == 3) {
+            if (energy >= 75) {
+                return true;
+            }
+            else return false;
+
+        }
+        return true;
+    }
+
+    public void sendBattleMessage(String message)
+    {
+        final TextView battleInfo1 = findViewById(R.id.battleInfo1);
+
+        battleInfo1.setText(message);
+    }
+}
 

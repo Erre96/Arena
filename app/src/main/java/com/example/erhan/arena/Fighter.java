@@ -27,6 +27,7 @@ import java.util.Random;
     public float evasion;
     public float accuracy;
     public float selfDmgReduc;
+    public float armorRating; //multiplier for enemy dmg, etc dmg * 0.8
     public float stRechargeRate;
 
     public int upgradePoints;
@@ -39,7 +40,7 @@ import java.util.Random;
         endurance = 10;
         defense = 1110;
 
-        maxSt = 1000;
+        maxSt = 100;
     }
 
     public void setDmg()
@@ -49,12 +50,28 @@ import java.util.Random;
         minDmg = Math.round(f);
     }
 
-    public void setCurDmg(int def)
+    public void setCurDmg(float ar, int type)
     {
         Random rand = new Random();
         curDmg = rand.nextInt(maxDmg + 1 - minDmg) + minDmg;
+        if(type == 2)
+        {
+            multiplyCurDmg(curDmg,1.3f);
+        }
+
+        if(type == 3)
+        {
+            multiplyCurDmg(curDmg,2.2f);
+        }
         setCriticalHit();
-        setSelfDmgReduction(def);
+        float f = curDmg * ar;
+        curDmg = Math.round(f);
+    }
+
+    public void multiplyCurDmg(float curDmg, float multiplier)
+    {
+        curDmg*=multiplier;
+        this.curDmg = Math.round(curDmg);
     }
 
     public void setCriticalChance()
@@ -78,7 +95,7 @@ import java.util.Random;
 
     public void setAccuracy()
     {
-        accuracy = (dexterity * 0.16f);
+        accuracy = (dexterity * 0.21f);
     }
 
     public void setHp()
@@ -92,11 +109,17 @@ import java.util.Random;
         stRechargeRate = (endurance / 10) + 50;
     }
 
-    private void setSelfDmgReduction(int def)
+    private void setSelfDmgReduction(int def) //Decreases your own attack damage against enemy
     {
        selfDmgReduc = ((def)*0.01f) / (1+0.01f*(def));
         float f = curDmg * (1 - selfDmgReduc);
         curDmg = Math.round(f);
+    }
+
+    private void setArmorRating()
+    {
+        float f = ((defense)*0.01f) / (1+0.01f*(defense));
+        armorRating = 1- f;
     }
 
     public void setAllStats()
@@ -107,6 +130,7 @@ import java.util.Random;
         setEvasion();
         setAccuracy();
         setStaminaRechargePercent();
+        setArmorRating();
 
         curSt = maxSt / 4;
     }
@@ -140,5 +164,20 @@ import java.util.Random;
                 BattleActivity.plr.upgradePoints--;
                 break;
         }
+    }
+
+    public boolean checkIfTired()
+    {
+        if(curSt <= maxSt) {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public void rest()
+    {
+        curSt += 12;
+        curHp+= maxHp/50;
     }
 }

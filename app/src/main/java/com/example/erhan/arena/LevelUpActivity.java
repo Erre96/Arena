@@ -21,15 +21,22 @@ public class LevelUpActivity extends AppCompatActivity {
         final Button dexButton = findViewById(R.id.plusDexterity);
         final Button defButton = findViewById(R.id.plusDefense);
         final Button endButton = findViewById(R.id.plusEndurance);
-        final Button nextButton = findViewById(R.id.nextButton);
+        final Button homeButton = findViewById(R.id.homeButton);
+        final Button extraButton = findViewById(R.id.extraButton);
 
 
         //on click listeners
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(LevelUpActivity.this, IdleActivity.class));
                 }
             });
+
+        extraButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(LevelUpActivity.this, statsInfoActivity.class));
+            }
+        });
 
         strButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

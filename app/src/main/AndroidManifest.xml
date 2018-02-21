@@ -27,7 +27,8 @@
         </activity>
         <activity android:name=".IdleActivity" />
         <activity android:name=".BattleActivity" />
-        <activity android:name=".LevelUpActivity"></activity>
+        <activity android:name=".LevelUpActivity" />
+        <activity android:name=".statsInfoActivity"></activity>
     </application>
 
 </manifest>

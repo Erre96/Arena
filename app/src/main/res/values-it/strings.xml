@@ -26,4 +26,6 @@
     <string name="aiWon"> Siete stato sconfigguto... <br/> Migliore fortuna la volta prossima </string>
     <string name="plrMiss">Avete mancato</string>
     <string name="aiMiss">"L'oppositore mancante</string>
+    <string name="more">più</string>
+    <string name="extra">Extra</string>
 </resources>

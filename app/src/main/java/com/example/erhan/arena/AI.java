@@ -16,7 +16,7 @@ public class AI extends Fighter {
         dexterity = 3+ ((lv * 2));
         defense = 4 + ((lv * 2));
 
-        maxSt = 1000;
+        maxSt = 100;
         curSt = maxSt;
     }
 

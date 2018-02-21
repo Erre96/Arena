@@ -4,15 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="#001369"
     tools:context="com.example.erhan.arena.BattleActivity">
+
+    <ImageView
+        android:id="@+id/arenaPic"
+        android:layout_width="376dp"
+        android:layout_height="487dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arena_painted_portrait" />
 
     <TextView
         android:id="@+id/battleInfo1"
         android:layout_width="0dp"
         android:layout_height="92dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_blue_dark"
+        android:alpha="0.8"
+        android:background="@android:color/background_dark"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,60 +38,66 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.334" />
 
+
     <Button
         android:id="@+id/attack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:text="@string/attack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/special"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.585" />
+        app:layout_constraintTop_toBottomOf="@+id/battleInfo1" />
 
     <Button
         android:id="@+id/special"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="32dp"
         android:text="@string/special"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/attack"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.585" />
+        app:layout_constraintTop_toBottomOf="@+id/battleInfo1" />
 
     <Button
         android:id="@+id/rage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/rage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/surrender"
-        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attack"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/attack" />
+
+    <Button
+        android:id="@+id/rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/rest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/special" />
+
+    <Button
+        android:id="@+id/throwSand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/throwSand"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rage" />
 
     <Button
         android:id="@+id/surrender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/surrender"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rage"
-        app:layout_constraintTop_toBottomOf="@+id/special"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/rest" />
 
     <TextView
         android:id="@+id/namePlr"
@@ -84,6 +106,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.75"
+        android:background="@android:color/black"
         android:text="TextView"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -98,6 +122,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.75"
+        android:background="@android:color/black"
         android:text="TextView"
         android:textColor="@android:color/holo_red_light"
         android:textSize="20sp"
@@ -112,6 +138,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.75"
+        android:background="@android:color/black"
         android:text="TextView"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="20sp"
@@ -126,6 +154,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.75"
+        android:background="@android:color/black"
         android:text="TextView"
         android:textColor="@android:color/holo_red_light"
         android:textSize="20sp"
@@ -140,6 +170,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.75"
+        android:background="@android:color/black"
         android:text="TextView"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="20sp"
@@ -154,6 +186,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:alpha="0.75"
+        android:background="@android:color/black"
         android:text="Opponent"
         android:textColor="@android:color/white"
         android:textSize="24sp"

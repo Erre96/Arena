@@ -25,4 +25,18 @@
     <string name="aiWon"> You were defeated... Better luck next time </string>
     <string name="plrMiss">You missed</string>
     <string name="aiMiss">The opponent missed</string>
+    <string name="more">More</string>
+    <string name="extra">Extra</string>
+    <string name="hpInfo">Hitpoints :</string>
+    <string name="dmgInfo">Damage :</string>
+    <string name="criticalChance"> Critical Strike : </string>
+    <string name="matchesWon">Matches Won :</string>
+    <string name="dmgReduction">Damage Reduction :</string>
+    <string name="attributes">Attributes</string>
+    <string name="home">Home</string>
+    <string name="notEnoughEnergy">You don\'t have enough energy to to that</string>
+    <string name="youRest">You decide to rest for a round. Your energy increases significantly.</string>
+    <string name="fullOfEnergy">You are already full of energy</string>
+    <string name="throwSand">Throw Sand</string>
+    <string name="rest">Rest</string>
 </resources>
