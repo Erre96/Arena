@@ -35,10 +35,10 @@ import java.util.Random;
     public void setStartingStats()
     {
         level = 1;
-        strength = 13;
-        dexterity = 5;
+        strength = 10;
+        dexterity = 10;
         endurance = 10;
-        defense = 1110;
+        defense = 10;
 
         maxSt = 100;
     }

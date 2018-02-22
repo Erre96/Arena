@@ -22,7 +22,7 @@ public class BattleActivity extends AppCompatActivity {
     public static AI ai = new AI();
 
     private CountDownTimer countDownTimer;
-    private long timeLeftInMilliseconds = 1600;
+    private long timeLeftInMilliseconds = 800;
     private boolean timerRunning;
     boolean plrActive = false;
     boolean aiActive = false;

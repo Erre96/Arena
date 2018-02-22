@@ -28,7 +28,8 @@ public class statsInfoActivity extends AppCompatActivity {
 
         hpValue.setText(String.valueOf(BattleActivity.plr.maxHp));
         dmgValue.setText(String.valueOf(BattleActivity.plr.minDmg+" - "+BattleActivity.plr.maxDmg));
-        criticalChance.setText(String.valueOf(BattleActivity.plr.critChance+" %"));
+        int c = Math.round(BattleActivity.plr.critChance);
+        criticalChance.setText(String.valueOf(c+" %"));
         float f = (1 - BattleActivity.plr.armorRating) * 100;
         int a = Math.round(f);
         dmgReduction.setText(String.valueOf(a)+" %");

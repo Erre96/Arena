@@ -12,7 +12,7 @@ public class AI extends Fighter {
         int lv = BattleActivity.plr.level;
 
         strength = 5+ ((lv * 3));
-        endurance = 2+ ((lv * 4));
+        endurance = 4+ ((lv * 4));
         dexterity = 3+ ((lv * 2));
         defense = 4 + ((lv * 2));
 
