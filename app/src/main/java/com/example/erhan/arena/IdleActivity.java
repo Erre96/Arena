@@ -1,11 +1,16 @@
 package com.example.erhan.arena;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 public class IdleActivity extends AppCompatActivity {
 
@@ -21,6 +26,7 @@ public class IdleActivity extends AppCompatActivity {
 
         final Button nextBattleButton = findViewById(R.id.nextBattle);
         final Button statsButton = findViewById(R.id.stats);
+        final Button saveButton = findViewById(R.id.saveGame);
 
 
         //on click listeners
@@ -37,6 +43,24 @@ public class IdleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                saveGame();
+            }
+        });
+    }
+
+    public void saveGame()
+    {
+        SharedPreferences mPrefs = getSharedPreferences("com.arena.unik", Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(BattleActivity.plr);
+        prefsEditor.putString("MyObject", json);
+        prefsEditor.apply();
+        Log.d("David",json + ": test");
     }
 }
 
